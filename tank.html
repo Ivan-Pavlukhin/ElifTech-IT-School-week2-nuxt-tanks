@@ -15,40 +15,52 @@
             max-width: 1400px;
             padding: 0 15px;
         }
+
+        table{
+            width: 320px;
+            border: 1px solid black;
+        }
+
+        tr:nth-child(even){
+            background-color: rgba(0,0,0,0.1);
+        }
+
     </style>
 </head>
 <body>
     <div class="wrapper">
         <div class="container">
             <h1>
-                <p><img id="flag" src="" alt=""><span id="tankName"></span></p>
+                <p><img id="flag" src="" alt=""> <span id="tankName"></span> Level 10</p>
             </h1>
             <p>Preview</p>
             <div class="flex-box">
                 <img id="tankImg" src="" alt="">
                 <div>
-                    <h2></h2>
+                    <h2>Characteristics</h2>
                     <table>
-                        <tr>
-                            <td>damage</td>
-                            <td>000</td>
-                        </tr>
-                        <tr>
-                            <td>breoning</td>
-                            <td>000</td>
-                        </tr>
-                        <tr>
-                            <td>attack speed</td>
-                            <td>000</td>
-                        </tr>
-                        <tr>
-                            <td>time of targeting</td>
-                            <td>000</td>
-                        </tr>
-                        <tr>
-                            <td>ammunition</td>
-                            <td>000</td>
-                        </tr>
+                        <tbody>
+                            <tr class="tr">
+                                <td>damage</td>
+                                <td id="damage"></td>
+                            </tr>
+                            <tr class="tr">
+                                <td>hit points</td>
+                                <td id="hitPoints"></td>
+                            </tr>
+                            <tr class="tr">
+                                <td>attack speed</td>
+                                <td id="attackSpeed"></td>
+                            </tr>
+                            <tr class="tr">
+                                <td>time of targeting</td>
+                                <td id="timeOfTargeting"></td>
+                            </tr>
+                            <tr class="tr">
+                                <td>ammunition</td>
+                                <td id="ammunition"></td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
                 
@@ -61,14 +73,93 @@
         const tankImgReq = document.getElementById('tankImg')
         const flagReq = document.getElementById('flag')
         const tankNameReq = document.getElementById('tankName')
+        const damageReq = document.getElementById('damage')
+        const hitPointsReq = document.getElementById('hitPoints')
+        const attackSpeedReq = document.getElementById('attackSpeed')
+        const timeOfTargetingReq = document.getElementById('timeOfTargeting')
+        const ammunitionReq = document.getElementById('ammunition')
         const hashTank = window.location.hash.slice(1)
 
-        tankNameReq.textContent = hashTank.split('_').filter(item => item !== '_').join(' ').toUpperCase()
+        const tanksCharacteristics = {
+            conqueror_gun: {
+            damage: 1350,
+            hitPoints: 530,
+            attackSpeed: 6,
+            timeOfTargeting: 2,
+            ammunition: 50
+            },
+            e_100: {
+                damage: 3350,
+                hitPoints: 330,
+                attackSpeed: 6,
+                timeOfTargeting: 4,
+                ammunition: 200
+            },
+            fv215b: {
+                damage: 1350,
+                hitPoints: 2030,
+                attackSpeed: 4,
+                timeOfTargeting: 3,
+                ammunition: 50
+            },
+            maus: {
+                damage: 3500,
+                hitPoints: 830,
+                attackSpeed: 5,
+                timeOfTargeting: 4,
+                ammunition: 150
+            },
+            object_140: {
+                damage: 1350,
+                hitPoints: 530,
+                attackSpeed: 6,
+                timeOfTargeting: 2,
+                ammunition: 50
+            },
+            t110e5: {
+                damage: 850,
+                hitPoints: 530,
+                attackSpeed: 10,
+                timeOfTargeting: 8,
+                ammunition: 80
+            },
+            t57: {
+                damage: 1650,
+                hitPoints: 730,
+                attackSpeed: 6,
+                timeOfTargeting: 4,
+                ammunition: 60
+            },
+            t62a: {
+                damage: 1050,
+                hitPoints: 730,
+                attackSpeed: 6,
+                timeOfTargeting: 3,
+                ammunition: 60
+            }
+        }
 
+        const tankName = hashTank.split('_').filter(item => item !== '_').join(' ').toUpperCase()
+        
+        const damage = tanksCharacteristics[hashTank].damage
+        const hitPoints = tanksCharacteristics[hashTank].hitPoints
+        const attackSpeed = tanksCharacteristics[hashTank].attackSpeed
+        const timeOfTargeting = tanksCharacteristics[hashTank].timeOfTargeting
+        const ammunition = tanksCharacteristics[hashTank].ammunition
+        
+        damageReq.textContent = damage
+        hitPointsReq.textContent = hitPoints
+        attackSpeedReq.textContent = attackSpeed
+        timeOfTargetingReq.textContent = timeOfTargeting
+        ammunitionReq.textContent = ammunition
+
+        tankNameReq.textContent = tankName
+
+        
         let flagSrc = ''
 
         switch (hashTank) {
-            case 'e-100':
+            case 'e_100':
                 flagSrc = './img/countries/germany.png'
                 break;
             case 'maus':
@@ -105,6 +196,8 @@
         function handlerToBack() {
             window.history.back()
         }
+
+        
     </script>
 </body>
 </html>
