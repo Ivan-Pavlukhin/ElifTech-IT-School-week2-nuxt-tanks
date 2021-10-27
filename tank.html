@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .flex-box{
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .container{
+            max-width: 1400px;
+            padding: 0 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <h1>
+                <p><img id="flag" src="" alt=""><span id="tankName"></span></p>
+            </h1>
+            <p>Preview</p>
+            <div class="flex-box">
+                <img id="tankImg" src="" alt="">
+                <div>
+                    <h2></h2>
+                    <table>
+                        <tr>
+                            <td>damage</td>
+                            <td>000</td>
+                        </tr>
+                        <tr>
+                            <td>breoning</td>
+                            <td>000</td>
+                        </tr>
+                        <tr>
+                            <td>attack speed</td>
+                            <td>000</td>
+                        </tr>
+                        <tr>
+                            <td>time of targeting</td>
+                            <td>000</td>
+                        </tr>
+                        <tr>
+                            <td>ammunition</td>
+                            <td>000</td>
+                        </tr>
+                    </table>
+                </div>
+                
+            </div>
+            <button id="goBack">go back</button>
+        </div>
+    </div>
+    <script>
+        const backReq = document.getElementById('goBack')
+        const tankImgReq = document.getElementById('tankImg')
+        const flagReq = document.getElementById('flag')
+        const tankNameReq = document.getElementById('tankName')
+        const hashTank = window.location.hash.slice(1)
+
+        tankNameReq.textContent = hashTank.split('_').filter(item => item !== '_').join(' ').toUpperCase()
+
+        let flagSrc = ''
+
+        switch (hashTank) {
+            case 'e-100':
+                flagSrc = './img/countries/germany.png'
+                break;
+            case 'maus':
+                flagSrc = './img/countries/germany.png'
+                break;
+            case 'conqueror_gun':
+                flagSrc = './img/countries/uk.png'
+                break;
+            case 'fv215b':
+                flagSrc = './img/countries/uk.png'
+                break;
+            case 'object_140':
+                flagSrc = './img/countries/ussr.png'
+                break;
+            case 't62a':
+                flagSrc = './img/countries/ussr.png'
+                break;
+            case 't110e5':
+                flagSrc = './img/countries/usa.png'
+                break;
+            case 't57':
+                flagSrc = './img/countries/usa.png'
+                break;
+            default:
+                break;
+        }
+
+        flagReq.setAttribute('src', flagSrc)
+
+        tankImgReq.setAttribute('src', `./img/tanks/${hashTank}.png`)
+        
+        backReq.addEventListener('click', handlerToBack)
+
+        function handlerToBack() {
+            window.history.back()
+        }
+    </script>
+</body>
+</html>
